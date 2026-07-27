@@ -20,6 +20,12 @@ public class FlightBookingDataRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        // Skip seeding if flights already exist, prevents duplicate rows on every restart
+        if (flightBookingRepository.count() > 0) {
+            System.out.println("Flights already seeded, skipping data initialization.");
+            return;
+        }
+
         // Available flights (7)
         FlightBooking flight1 = FlightBooking.builder()
                 .flightNumber("FL001")
