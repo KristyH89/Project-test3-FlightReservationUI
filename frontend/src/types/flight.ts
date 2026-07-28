@@ -5,6 +5,7 @@ export interface FlightListItem {
     departureTime: string; // ISO 8601 string, backend sends LocalDateTime as text
     arrivalTime: string;
     status: "AVAILABLE" | "BOOKED";
+    origin: string;
     destination: string;
     price: number;
 }
@@ -15,6 +16,7 @@ export interface AvailableFlight {
     flightNumber: string;
     departureTime: string;
     arrivalTime: string;
+    origin: string;
     destination: string;
     price: number;
 }
@@ -28,6 +30,7 @@ export interface FlightBooking {
     departureTime: string;
     arrivalTime: string;
     status: "AVAILABLE" | "BOOKED";
+    origin: string;
     destination: string;
     price: number;
 }
