@@ -36,6 +36,9 @@ public class FlightBooking {
     private FlightStatus status;
     
     private String destination;
+
+    @Column(nullable = false)
+    private String origin;
     
     private Double price;
 }

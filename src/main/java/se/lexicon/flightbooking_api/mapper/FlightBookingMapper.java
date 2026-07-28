@@ -18,6 +18,7 @@ public class FlightBookingMapper {
             entity.getDepartureTime(),
             entity.getArrivalTime(),
             entity.getStatus().toString(),
+            entity.getOrigin(),
             entity.getDestination(),
             entity.getPrice()
         );
@@ -29,6 +30,7 @@ public class FlightBookingMapper {
             entity.getFlightNumber(),
             entity.getDepartureTime(),
             entity.getArrivalTime(),
+            entity.getOrigin(),
             entity.getDestination(),
             entity.getPrice()
         );
@@ -41,6 +43,7 @@ public class FlightBookingMapper {
                 entity.getDepartureTime(),
                 entity.getArrivalTime(),
                 entity.getStatus().toString(),
+                entity.getOrigin(), 
                 entity.getDestination(),
                 entity.getPrice()
         );

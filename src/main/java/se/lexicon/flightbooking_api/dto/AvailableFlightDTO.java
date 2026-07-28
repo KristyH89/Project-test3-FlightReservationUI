@@ -13,6 +13,8 @@ public record AvailableFlightDTO(
         LocalDateTime departureTime,
         @NotNull(message = "Arrival time is required")
         LocalDateTime arrivalTime,
+        @NotBlank(message = "Origin is required")
+        String origin,
         @NotBlank(message = "Destination is required")
         String destination,
         @Positive(message = "Price must be positive")

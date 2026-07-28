@@ -26,102 +26,112 @@ public class FlightBookingDataRunner implements CommandLineRunner {
             return;
         }
 
-        // Available flights (7)
+        // Available flights (7) — all departing from Amsterdam, destinations based on personal travel history
         FlightBooking flight1 = FlightBooking.builder()
                 .flightNumber("FL001")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(1))
-                .arrivalTime(LocalDateTime.now().plusDays(1).plusHours(2))
+                .arrivalTime(LocalDateTime.now().plusDays(1).plusMinutes(90)) // 1.5 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("London")
-                .price(199.99)
+                .destination("Guernsey")
+                .price(169.99)
                 .build();
 
         FlightBooking flight2 = FlightBooking.builder()
                 .flightNumber("FL002")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(2))
-                .arrivalTime(LocalDateTime.now().plusDays(2).plusHours(3))
+                .arrivalTime(LocalDateTime.now().plusDays(2).plusMinutes(210)) // 3.5 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("Paris")
-                .price(249.99)
+                .destination("Heraklion")
+                .price(299.99)
                 .build();
 
         FlightBooking flight3 = FlightBooking.builder()
                 .flightNumber("FL003")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(3))
-                .arrivalTime(LocalDateTime.now().plusDays(3).plusHours(4))
+                .arrivalTime(LocalDateTime.now().plusDays(3).plusMinutes(180)) // 3 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("Rome")
-                .price(299.99)
+                .destination("Skopje")
+                .price(269.99)
                 .build();
 
         FlightBooking flight4 = FlightBooking.builder()
                 .flightNumber("FL004")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(4))
-                .arrivalTime(LocalDateTime.now().plusDays(4).plusHours(1))
+                .arrivalTime(LocalDateTime.now().plusDays(4).plusMinutes(90)) // 1.5 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("Amsterdam")
-                .price(179.99)
+                .destination("Zurich")
+                .price(219.99)
                 .build();
 
         FlightBooking flight5 = FlightBooking.builder()
                 .flightNumber("FL005")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(5))
-                .arrivalTime(LocalDateTime.now().plusDays(5).plusHours(3))
+                .arrivalTime(LocalDateTime.now().plusDays(5).plusMinutes(120)) // 2 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("Barcelona")
-                .price(229.99)
+                .destination("Budapest")
+                .price(239.99)
                 .build();
 
         FlightBooking flight6 = FlightBooking.builder()
                 .flightNumber("FL006")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(6))
-                .arrivalTime(LocalDateTime.now().plusDays(6).plusHours(2))
+                .arrivalTime(LocalDateTime.now().plusDays(6).plusMinutes(360)) // 6 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("Berlin")
-                .price(189.99)
+                .destination("Sal")
+                .price(499.99)
                 .build();
 
         FlightBooking flight7 = FlightBooking.builder()
                 .flightNumber("FL007")
+                .origin("Amsterdam")
                 .departureTime(LocalDateTime.now().plusDays(7))
-                .arrivalTime(LocalDateTime.now().plusDays(7).plusHours(3))
+                .arrivalTime(LocalDateTime.now().plusDays(7).plusMinutes(660)) // 11 hours
                 .status(FlightStatus.AVAILABLE)
-                .destination("Vienna")
-                .price(259.99)
+                .destination("San Francisco")
+                .price(899.99)
                 .build();
 
-        // Booked flights (3)
+        // Booked flights (3) — also departing from Amsterdam, with a test passenger each
         FlightBooking bookedFlight1 = FlightBooking.builder()
                 .flightNumber("FL008")
-                .passengerName("John Doe")
-                .passengerEmail("john.doe@example.com")
+                .origin("Amsterdam")
+                .passengerName("Jeroen de Vries")
+                .passengerEmail("jeroen.de.vries@gmail.com")
                 .departureTime(LocalDateTime.now().plusDays(1))
-                .arrivalTime(LocalDateTime.now().plusDays(1).plusHours(2))
+                .arrivalTime(LocalDateTime.now().plusDays(1).plusMinutes(120)) // 2 hours
                 .status(FlightStatus.BOOKED)
-                .destination("Madrid")
-                .price(219.99)
+                .destination("Gothenburg")
+                .price(189.99)
                 .build();
 
         FlightBooking bookedFlight2 = FlightBooking.builder()
                 .flightNumber("FL009")
-                .passengerName("Jane Smith")
-                .passengerEmail("jane.smith@example.com")
+                .origin("Amsterdam")
+                .passengerName("Fleur van Beek")
+                .passengerEmail("fleur.van.beek@gmail.com")
                 .departureTime(LocalDateTime.now().plusDays(2))
-                .arrivalTime(LocalDateTime.now().plusDays(2).plusHours(3))
+                .arrivalTime(LocalDateTime.now().plusDays(2).plusMinutes(210)) // 3.5 hours
                 .status(FlightStatus.BOOKED)
-                .destination("Prague")
-                .price(199.99)
+                .destination("Istanbul")
+                .price(349.99)
                 .build();
 
         FlightBooking bookedFlight3 = FlightBooking.builder()
                 .flightNumber("FL010")
-                .passengerName("Mike Johnson")
-                .passengerEmail("mike.johnson@example.com")
+                .origin("Amsterdam")
+                .passengerName("Bram Visser")
+                .passengerEmail("bram.visser@gmail.com")
                 .departureTime(LocalDateTime.now().plusDays(3))
-                .arrivalTime(LocalDateTime.now().plusDays(3).plusHours(2))
+                .arrivalTime(LocalDateTime.now().plusDays(3).plusMinutes(150)) // 2.5 hours
                 .status(FlightStatus.BOOKED)
-                .destination("Copenhagen")
-                .price(239.99)
+                .destination("Rome")
+                .price(249.99)
                 .build();
 
         // Save all flights
@@ -132,7 +142,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                         flightBookingRepository.save(flight);
                         System.out.println("Created flight: " + flight.getFlightNumber() +
                                 " (Status: " + flight.getStatus() +
-                                ", Destination: " + flight.getDestination() + ")");
+                                ", " + flight.getOrigin() + " -> " + flight.getDestination() + ")");
                     } catch (Exception e) {
                         System.err.println("Error creating flight: " + flight.getFlightNumber() +
                                 " - " + e.getMessage());
