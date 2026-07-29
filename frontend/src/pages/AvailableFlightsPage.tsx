@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { getAvailableFlights, FlightApiError } from "../api/flightApi";
-import type { AvailableFlight } from "../types/flight";
+import type { AvailableFlight, FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
+import { BookingModal } from "../components/BookingModal";
 
 export function AvailableFlightsPage() {
     const [flights, setFlights] = useState<AvailableFlight[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedFlight, setSelectedFlight] = useState<AvailableFlight | null>(null);
+    const [confirmedBooking, setConfirmedBooking] = useState<FlightBooking | null>(null);
 
     useEffect(() => {
         async function loadAvailableFlights() {
@@ -24,6 +27,13 @@ export function AvailableFlightsPage() {
         loadAvailableFlights();
     }, []);
 
+    function handleBooked(booking: FlightBooking) {
+        // Remove the now-booked flight from the available list, no full page reload needed
+        setFlights((current) => current.filter((f) => f.id !== booking.id));
+        setSelectedFlight(null);
+        setConfirmedBooking(booking);
+    }
+
     if (isLoading) {
         return <p>Loading available flights...</p>;
     }
@@ -32,18 +42,35 @@ export function AvailableFlightsPage() {
         return <p role="alert">Something went wrong: {error}</p>;
     }
 
-    if (flights.length === 0) {
-        return <p>No flights currently available.</p>;
-    }
-
     return (
         <div>
             <h1>Available Flights</h1>
-            <div className="flight-list">
-                {flights.map((flight) => (
-                    <FlightCard key={flight.id} flight={flight} />
-                ))}
-            </div>
+
+            {confirmedBooking && (
+                <p className="booking-success" role="status">
+                    Booking confirmed for {confirmedBooking.passengerName} on {confirmedBooking.flightNumber}
+                    {" "}({confirmedBooking.origin} → {confirmedBooking.destination}).
+                </p>
+            )}
+            {flights.length === 0 ? (
+                <p>No flights currently available.</p>
+            ) : (
+                <div className="flight-list">
+                    {flights.map((flight) => (
+                        <FlightCard key={flight.id} flight={flight} onBook={() => setSelectedFlight(flight)} />
+                    ))}
+                </div>
+            )}
+
+            {selectedFlight && (
+                <BookingModal
+                    flight={selectedFlight}
+                    onClose={() => setSelectedFlight(null)}
+                    onBooked={handleBooked}
+                />
+            )}
         </div>
     );
 }
+
+

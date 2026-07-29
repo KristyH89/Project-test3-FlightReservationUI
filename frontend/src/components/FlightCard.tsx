@@ -11,9 +11,10 @@ interface FlightCardProps {
         price: number;
         status?: "AVAILABLE" | "BOOKED";
     };
+    onBook?: (flightId: number) => void; // Optional booking handler. When provided, a "Book flight" button is shown.
 }
 
-export function FlightCard({ flight }: FlightCardProps) {
+export function FlightCard({ flight, onBook }: FlightCardProps) {
     // Format an ISO date string into a readable format, e.g. "3 Aug 2026, 09:20".
     const formatDateTime = (isoString: string) =>
         new Date(isoString).toLocaleString("en-GB", {
@@ -25,9 +26,11 @@ export function FlightCard({ flight }: FlightCardProps) {
         });
 
     // Calculate flight duration from the two timestamps, shown as e.g. "2h 30m"
-    const durationMinutes = Math.round(
-        (new Date(flight.arrivalTime).getTime() - new Date(flight.departureTime).getTime()) / 60000
-    );
+    const departure = new Date(flight.departureTime);
+    const arrival = new Date(flight.arrivalTime);
+
+    const durationMinutes =
+        Math.round((arrival.getTime() - departure.getTime()) / 60000);
     const hours = Math.floor(durationMinutes / 60);
     const minutes = durationMinutes % 60;
     const formattedDuration = minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
@@ -55,10 +58,15 @@ export function FlightCard({ flight }: FlightCardProps) {
                 {flight.status && (
                     <span className={`status-badge ${flight.status === "AVAILABLE" ? "available" : "booked"}`}>
                     {flight.status === "AVAILABLE" ? <CheckCircle2 size={14}/> : <XCircle size={14}/>}
-                        {flight.status}
+                        {flight.status === "AVAILABLE" ? "Available" : "Booked"}
                     </span>
                 )}
                 <p className="flight-price">€{flight.price.toFixed(2)}</p>
+                {onBook && (
+                    <button type="button" className="book-button" onClick={() => onBook(flight.id)}>
+                        Book now
+                    </button>
+                )}
             </div>
         </div>
     );
