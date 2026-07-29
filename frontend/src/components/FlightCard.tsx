@@ -1,10 +1,11 @@
-import { CheckCircle2, XCircle, Plane, Calendar } from "lucide-react";
+import { CheckCircle2, XCircle, Plane, Calendar, Clock } from "lucide-react";
 
 interface FlightCardProps {
     flight: {
         id: number;
         flightNumber: string;
         departureTime: string;
+        arrivalTime: string;
         origin: string;
         destination: string;
         price: number;
@@ -14,13 +15,22 @@ interface FlightCardProps {
 
 export function FlightCard({ flight }: FlightCardProps) {
     // Format an ISO date string into a readable format, e.g. "3 Aug 2026, 09:20".
-    const formattedDeparture = new Date(flight.departureTime).toLocaleString("en-GB", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-    });
+    const formatDateTime = (isoString: string) =>
+        new Date(isoString).toLocaleString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+
+    // Calculate flight duration from the two timestamps, shown as e.g. "2h 30m"
+    const durationMinutes = Math.round(
+        (new Date(flight.arrivalTime).getTime() - new Date(flight.departureTime).getTime()) / 60000
+    );
+    const hours = Math.floor(durationMinutes / 60);
+    const minutes = durationMinutes % 60;
+    const formattedDuration = minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
 
     return (
         <div className="flight-card">
@@ -32,7 +42,11 @@ export function FlightCard({ flight }: FlightCardProps) {
                 </div>
                 <div className="flight-time">
                     <Calendar size={16}/>
-                    <span>{formattedDeparture}</span>
+                    <span>{formatDateTime(flight.departureTime)} → {formatDateTime(flight.arrivalTime)}</span>
+                </div>
+                <div className="flight-duration">
+                    <Clock size={16}/>
+                    <span>{formattedDuration}</span>
                 </div>
             </div>
 
@@ -49,4 +63,3 @@ export function FlightCard({ flight }: FlightCardProps) {
         </div>
     );
 }
-
