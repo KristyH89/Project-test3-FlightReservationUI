@@ -12,9 +12,10 @@ interface FlightCardProps {
         status?: "AVAILABLE" | "BOOKED";
     };
     onBook?: (flightId: number) => void; // Optional booking handler. When provided, a "Book flight" button is shown.
+    context?: "flights" | "my-bookings"; // determines how the BOOKED status is visually framed
 }
 
-export function FlightCard({ flight, onBook }: FlightCardProps) {
+export function FlightCard({ flight, onBook, context = "flights" }: FlightCardProps) {
     // Format an ISO date string into a readable format, e.g. "3 Aug 2026, 09:20".
     const formatDateTime = (isoString: string) =>
         new Date(isoString).toLocaleString("en-GB", {
@@ -35,6 +36,10 @@ export function FlightCard({ flight, onBook }: FlightCardProps) {
     const minutes = durationMinutes % 60;
     const formattedDuration = minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
 
+    // Was the flight booked through the "my bookings" context? If so, treat it as
+    // a positive outcome (the user successfully booked it) rather than a negative one.
+    const isPositiveBooked = flight.status === "BOOKED" && context === "my-bookings";
+
     return (
         <div className="flight-card">
             <div className="flight-card-main">
@@ -53,15 +58,16 @@ export function FlightCard({ flight, onBook }: FlightCardProps) {
                 </div>
             </div>
 
+
             <div className="flight-card-side">
                 {/* Only show a status badge when the data includes a status field. */}
                 {flight.status && (
-                    <span className={`status-badge ${flight.status === "AVAILABLE" ? "available" : "booked"}`}>
-                    {flight.status === "AVAILABLE" ? <CheckCircle2 size={14}/> : <XCircle size={14}/>}
-                        {flight.status === "AVAILABLE" ? "Available" : "Booked"}
-                    </span>
+                    <span className={`status-badge ${flight.status === "AVAILABLE" || isPositiveBooked ? "available" : "booked"}`}>
+        {flight.status === "AVAILABLE" || isPositiveBooked ? <CheckCircle2 size={14}/> : <XCircle size={14}/>}
+                        {flight.status}
+        </span>
                 )}
-                <p className="flight-price">€{flight.price.toFixed(2)}</p>
+                <p className="flight-price">€ {flight.price.toFixed(2)}</p>
                 {onBook && (
                     <button type="button" className="book-button" onClick={() => onBook(flight.id)}>
                         Book now

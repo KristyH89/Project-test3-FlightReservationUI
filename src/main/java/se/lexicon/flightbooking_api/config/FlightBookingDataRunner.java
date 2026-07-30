@@ -46,7 +46,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(6).plusDays(0).withHour(8).withMinute(45))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Guernsey")
-                .price( 169.99)
+                .price(169.99)
                 .build();
 
         FlightBooking flight2 = FlightBooking.builder()
@@ -56,7 +56,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(6).plusDays(2).withHour(17).withMinute(10))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Heraklion")
-                .price( 299.99)
+                .price(299.99)
                 .build();
 
         FlightBooking flight3 = FlightBooking.builder()
@@ -66,7 +66,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(6).plusDays(5).withHour(12).withMinute(5))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Skopje")
-                .price( 269.99)
+                .price(269.99)
                 .build();
 
         FlightBooking flight4 = FlightBooking.builder()
@@ -76,7 +76,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(7).plusDays(0).withHour(17).withMinute(50))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Zurich")
-                .price( 219.99)
+                .price(219.99)
                 .build();
 
         FlightBooking flight5 = FlightBooking.builder()
@@ -86,7 +86,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(7).plusDays(3).withHour(8).withMinute(50))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Budapest")
-                .price( 239.99)
+                .price(239.99)
                 .build();
 
         FlightBooking flight6 = FlightBooking.builder()
@@ -96,7 +96,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(7).plusDays(6).withHour(14).withMinute(30))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Sal")
-                .price( 499.99)
+                .price(499.99)
                 .build();
 
         FlightBooking flight7 = FlightBooking.builder()
@@ -106,7 +106,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(8).plusDays(2).withHour(21).withMinute(30))
                 .status(FlightStatus.AVAILABLE)
                 .destination("San Francisco")
-                .price( 899.99)
+                .price(899.99)
                 .build();
 
         // Booked flights (3)
@@ -119,7 +119,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(6).plusDays(1).withHour(10).withMinute(0))
                 .status(FlightStatus.BOOKED)
                 .destination("Gothenburg")
-                .price( 189.99)
+                .price(189.99)
                 .build();
 
         FlightBooking bookedFlight2 = FlightBooking.builder()
@@ -131,7 +131,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(6).plusDays(6).withHour(13).withMinute(30))
                 .status(FlightStatus.BOOKED)
                 .destination("Istanbul")
-                .price( 349.99)
+                .price(349.99)
                 .build();
 
         FlightBooking bookedFlight3 = FlightBooking.builder()
@@ -143,7 +143,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .arrivalTime(baseDate.plusWeeks(7).plusDays(2).withHour(14).withMinute(30))
                 .status(FlightStatus.BOOKED)
                 .destination("Rome")
-                .price( 249.99)
+                .price(249.99)
                 .build();
 
         // Save all flights

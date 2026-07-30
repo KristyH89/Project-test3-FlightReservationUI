@@ -106,7 +106,7 @@ export function BookingModal({ flight, onClose, onBooked }: BookingModalProps) {
                     minute: "2-digit",
                 })}
                 <br />
-                €{flight.price.toFixed(2)}
+                € {flight.price.toFixed(2)}
             </p>
 
             <form onSubmit={handleSubmit}>
