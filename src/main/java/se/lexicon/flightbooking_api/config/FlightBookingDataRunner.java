@@ -92,8 +92,8 @@ public class FlightBookingDataRunner implements CommandLineRunner {
         FlightBooking flight6 = FlightBooking.builder()
                 .flightNumber("FL006")
                 .origin("Amsterdam")
-                .departureTime(baseDate.plusWeeks(7).plusDays(6).withHour(8).withMinute(30))
-                .arrivalTime(baseDate.plusWeeks(7).plusDays(6).withHour(14).withMinute(30))
+                .departureTime(baseDate.plusWeeks(7).plusDays(6).withHour(22).withMinute(30))
+                .arrivalTime(baseDate.plusWeeks(7).plusDays(7).withHour(6).withMinute(30))
                 .status(FlightStatus.AVAILABLE)
                 .destination("Sal")
                 .price(499.99)
@@ -108,6 +108,7 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .destination("San Francisco")
                 .price(899.99)
                 .build();
+
 
         // Booked flights (3)
         FlightBooking bookedFlight1 = FlightBooking.builder()

@@ -1,17 +1,22 @@
 import { NavLink } from "react-router-dom";
-import { Plane } from "lucide-react";
 
 export function Navbar() {
     return (
-        <nav>
-            <NavLink to="/">
-                <Plane size={20} />
+        <nav className="navbar">
+            <NavLink to="/" className="navbar-brand">
+                <img src="/FlyOrange2-Photoroom(5).ico" alt="Fly Orange logo" className="navbar-logo" />
                 Fly Orange
             </NavLink>
-            <div>
-                <NavLink to="/flights">All Flights</NavLink>
-                <NavLink to="/flights/available">Available Flights</NavLink>
-                <NavLink to="/my-bookings">My Bookings</NavLink>
+            <div className="navbar-links">
+                <NavLink to="/flights" className={({ isActive }) => isActive ? "active" : ""}>
+                    All Flights
+                </NavLink>
+                <NavLink to="/flights/available" className={({ isActive }) => isActive ? "active" : ""}>
+                    Available Flights
+                </NavLink>
+                <NavLink to="/my-bookings" className={({ isActive }) => isActive ? "active" : ""}>
+                    My Bookings
+                </NavLink>
             </div>
         </nav>
     );
