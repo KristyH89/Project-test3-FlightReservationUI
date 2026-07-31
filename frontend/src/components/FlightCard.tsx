@@ -11,12 +11,12 @@ interface FlightCardProps {
         price: number;
         status?: "AVAILABLE" | "BOOKED";
     };
-    onBook?: (flightId: number) => void; // Optional booking handler. When provided, a "Book flight" button is shown.
+    onBook?: (flightId: number) => void; // Optional booking handler. When provided, booking becomes possible.
     context?: "flights" | "my-bookings"; // determines how the BOOKED status is visually framed
+    bookingStyle?: "button" | "badge"; // "button" shows a separate Book now button; "badge" makes the AVAILABLE badge itself clickable
 }
 
-export function FlightCard({ flight, onBook, context = "flights" }: FlightCardProps) {
-    // Format an ISO date string into a readable format, e.g. "3 Aug 2026, 09:20".
+export function FlightCard({ flight, onBook, context = "flights", bookingStyle = "button" }: FlightCardProps) {
     const formatDateTime = (isoString: string) =>
         new Date(isoString).toLocaleString("en-GB", {
             day: "numeric",
@@ -26,7 +26,6 @@ export function FlightCard({ flight, onBook, context = "flights" }: FlightCardPr
             minute: "2-digit",
         });
 
-    // Calculate flight duration from the two timestamps, shown as e.g. "2h 30m"
     const departure = new Date(flight.departureTime);
     const arrival = new Date(flight.arrivalTime);
 
@@ -36,9 +35,20 @@ export function FlightCard({ flight, onBook, context = "flights" }: FlightCardPr
     const minutes = durationMinutes % 60;
     const formattedDuration = minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
 
-    // Was the flight booked through the "my bookings" context? If so, treat it as
-    // a positive outcome (the user successfully booked it) rather than a negative one.
     const isPositiveBooked = flight.status === "BOOKED" && context === "my-bookings";
+    /*  A flight is bookable when a handler is provided, and its status is either
+        explicitly "AVAILABLE" (All Flights) or simply absent (Available Flights,
+        where every entry is available by definition and has no status field)     */
+    const canBook = Boolean(onBook) && (flight.status === undefined || flight.status === "AVAILABLE");
+    const isBadgeClickable = canBook && bookingStyle === "badge";
+    const showBookButton = canBook && bookingStyle === "button";
+
+    const badgeContent = (
+        <>
+            {flight.status === "AVAILABLE" || isPositiveBooked ? <CheckCircle2 size={14}/> : <XCircle size={14}/>}
+            {flight.status}
+        </>
+    );
 
     return (
         <div className="flight-card">
@@ -58,18 +68,26 @@ export function FlightCard({ flight, onBook, context = "flights" }: FlightCardPr
                 </div>
             </div>
 
-
             <div className="flight-card-side">
-                {/* Only show a status badge when the data includes a status field. */}
                 {flight.status && (
-                    <span className={`status-badge ${flight.status === "AVAILABLE" || isPositiveBooked ? "available" : "booked"}`}>
-        {flight.status === "AVAILABLE" || isPositiveBooked ? <CheckCircle2 size={14}/> : <XCircle size={14}/>}
-                        {flight.status}
-        </span>
+                    isBadgeClickable ? (
+                        <button
+                            type="button"
+                            className="status-badge available clickable"
+                            onClick={() => onBook?.(flight.id)}
+                            aria-label={`Book flight ${flight.flightNumber}`}
+                        >
+                            {badgeContent}
+                        </button>
+                    ) : (
+                        <span className={`status-badge ${flight.status === "AVAILABLE" || isPositiveBooked ? "available" : "booked"}`}>
+                            {badgeContent}
+                        </span>
+                    )
                 )}
                 <p className="flight-price">€ {flight.price.toFixed(2)}</p>
-                {onBook && (
-                    <button type="button" className="book-button" onClick={() => onBook(flight.id)}>
+                {showBookButton && (
+                    <button type="button" className="book-button" onClick={() => onBook?.(flight.id)}>
                         Book now
                     </button>
                 )}

@@ -24,7 +24,7 @@ export function AvailableFlightsPage() {
             }
         }
 
-        loadAvailableFlights();
+        void loadAvailableFlights();
     }, []);
 
     function handleBooked(booking: FlightBooking) {
