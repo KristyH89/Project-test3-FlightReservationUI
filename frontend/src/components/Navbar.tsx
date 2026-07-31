@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 export function Navbar() {
     return (
         <nav className="navbar">
+            <div className="navbar-left"></div>
+
             <NavLink to="/" className="navbar-brand">
                 <img src="/FlyOrange2-Photoroom(5).ico" alt="Fly Orange logo" className="navbar-logo" />
                 Fly Orange
