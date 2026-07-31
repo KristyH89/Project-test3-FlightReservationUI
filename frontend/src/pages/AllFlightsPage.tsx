@@ -50,7 +50,7 @@ export function AllFlightsPage() {
     }
 
     return (
-        <div>
+        <div className="page-container">
             <h1>All Flights</h1>
 
             {confirmedBooking && (

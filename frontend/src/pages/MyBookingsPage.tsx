@@ -10,8 +10,6 @@ export function MyBookingsPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Track which flight is pending cancel confirmation, so we can show a
-    // "are you sure" step inline instead of cancelling on the first click
     const [pendingCancelId, setPendingCancelId] = useState<number | null>(null);
     const [isCancelling, setIsCancelling] = useState(false);
     const [cancelError, setCancelError] = useState<string | null>(null);
@@ -56,64 +54,80 @@ export function MyBookingsPage() {
     }
 
     return (
-        <div>
-            <h1>My Bookings</h1>
+        <div className="page-container">
+            <div className="mybookings-row">
 
-            <form onSubmit={handleSearch} className="lookup-form">
-                <label htmlFor="lookupEmail">Email address</label>
-                <input
-                    id="lookupEmail"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <button type="submit" disabled={isLoading}>
-                    {isLoading ? "Searching..." : "Find my bookings"}
-                </button>
-            </form>
+                {/* LEFT SIDE — search form and results */}
+                <div className="mybookings-left">
+                    <h1>My Bookings</h1>
 
-            {error && <p className="form-error" role="alert">{error}</p>}
-            {cancelSuccessMessage && <p className="booking-success" role="status">{cancelSuccessMessage}</p>}
+                    <form onSubmit={handleSearch} className="lookup-form">
+                        <label htmlFor="lookupEmail">Email address</label>
+                        <input
+                            id="lookupEmail"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <button type="submit" disabled={isLoading}>
+                            {isLoading ? "Searching..." : "Find my bookings"}
+                        </button>
+                    </form>
 
-            {hasSearched && bookings.length === 0 && !error && (
-                <p>No bookings found for this email address.</p>
-            )}
+                    {error && <p className="form-error" role="alert">{error}</p>}
+                    {cancelSuccessMessage && <p className="booking-success" role="status">{cancelSuccessMessage}</p>}
 
-            {bookings.length > 0 && (
-                <div className="flight-list">
-                    {bookings.map((booking) => (
-                        <div key={booking.id} className="booking-item">
-                            <FlightCard flight={booking} context="my-bookings" />
+                    {hasSearched && bookings.length === 0 && !error && (
+                        <p>No bookings found for this email address.</p>
+                    )}
 
-                            {pendingCancelId === booking.id ? (
-                                <div className="cancel-confirm">
-                                    <p>Are you sure you want to cancel this booking?</p>
-                                    {cancelError && <p className="form-error" role="alert">{cancelError}</p>}
-                                    <button
-                                        type="button"
-                                        onClick={() => handleConfirmCancel(booking.id)}
-                                        disabled={isCancelling}
-                                    >
-                                        {isCancelling ? "Cancelling..." : "Yes, cancel booking"}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => setPendingCancelId(null)}
-                                        disabled={isCancelling}
-                                    >
-                                        Keep booking
-                                    </button>
+                    {bookings.length > 0 && (
+                        <div className="flight-list">
+                            {bookings.map((booking) => (
+                                <div key={booking.id} className="booking-item">
+                                    <FlightCard flight={booking} context="my-bookings"/>
+
+                                    {pendingCancelId === booking.id ? (
+                                        <div className="cancel-confirm">
+                                            <p>Are you sure you want to cancel this booking?</p>
+                                            {cancelError && <p className="form-error" role="alert">{cancelError}</p>}
+                                            <button
+                                                type="button"
+                                                onClick={() => handleConfirmCancel(booking.id)}
+                                                disabled={isCancelling}
+                                            >
+                                                {isCancelling ? "Cancelling..." : "Yes, cancel booking"}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setPendingCancelId(null)}
+                                                disabled={isCancelling}
+                                            >
+                                                Keep booking
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <button type="button" onClick={() => setPendingCancelId(booking.id)}>
+                                            Cancel booking
+                                        </button>
+                                    )}
                                 </div>
-                            ) : (
-                                <button type="button" onClick={() => setPendingCancelId(booking.id)}>
-                                    Cancel booking
-                                </button>
-                            )}
+                            ))}
                         </div>
-                    ))}
+                    )}
                 </div>
-            )}
+
+                {/* RIGHT SIDE — full-height image */}
+                <div className="mybookings-right">
+                    <img
+                        src="/bookingplane.jpeg"
+                        alt="Fly Orange plane at sunset"
+                        className="booking-plane-image"
+                    />
+                </div>
+
+            </div>
         </div>
     );
 }

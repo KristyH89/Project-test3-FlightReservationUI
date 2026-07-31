@@ -43,7 +43,7 @@ export function AvailableFlightsPage() {
     }
 
     return (
-        <div>
+        <div className="page-container">
             <h1>Available Flights</h1>
 
             {confirmedBooking && (
