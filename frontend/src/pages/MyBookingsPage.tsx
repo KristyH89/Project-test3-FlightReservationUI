@@ -94,6 +94,7 @@ export function MyBookingsPage() {
                                             {cancelError && <p className="form-error" role="alert">{cancelError}</p>}
                                             <button
                                                 type="button"
+                                                className="confirm-cancel-button"
                                                 onClick={() => handleConfirmCancel(booking.id)}
                                                 disabled={isCancelling}
                                             >
@@ -101,6 +102,7 @@ export function MyBookingsPage() {
                                             </button>
                                             <button
                                                 type="button"
+                                                className="keep-booking-button"
                                                 onClick={() => setPendingCancelId(null)}
                                                 disabled={isCancelling}
                                             >
@@ -108,7 +110,7 @@ export function MyBookingsPage() {
                                             </button>
                                         </div>
                                     ) : (
-                                        <button type="button" onClick={() => setPendingCancelId(booking.id)}>
+                                        <button type="button" className="cancel-button" onClick={() => setPendingCancelId(booking.id)}>
                                             Cancel booking
                                         </button>
                                     )}

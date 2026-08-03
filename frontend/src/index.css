@@ -378,6 +378,37 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.cancel-button {
+  background: var(--color-orange-tint);
+  color: var(--color-orange-dark);
+  border: 1px solid var(--color-orange);
+}
+
+.cancel-button:hover {
+  background: var(--color-orange);
+  color: white;
+}
+
+.cancel-confirm .confirm-cancel-button {
+  background: var(--color-danger);
+  color: white;
+  border: none;
+}
+
+.cancel-confirm .confirm-cancel-button:hover {
+  background: #991B1B;
+}
+
+.cancel-confirm .keep-booking-button {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+}
+
+.cancel-confirm .keep-booking-button:hover {
+  background: var(--color-bg);
+}
+
 /* ===== Forms ===== */
 form label {
   display: block;
