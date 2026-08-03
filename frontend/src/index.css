@@ -678,3 +678,63 @@ form input:focus {
     height: 220px;
   }
 }
+
+/* ===== Toast notification ===== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--color-success-tint);
+  border-left: 4px solid var(--color-success);
+  box-shadow: 0 4px 16px rgba(28, 35, 51, 0.18);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+  z-index: 1000;
+  animation: toast-slide-in 0.2s ease-out;
+}
+
+.toast svg:first-child {
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+.toast span {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+}
+
+.toast-close {
+  background: none;
+  padding: 4px;
+  color: var(--color-ink-muted);
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  background: var(--color-bg);
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}

@@ -3,6 +3,7 @@ import { getAvailableFlights, FlightApiError } from "../api/flightApi";
 import type { AvailableFlight, FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
 import { BookingModal } from "../components/BookingModal";
+import { Toast } from "../components/Toast";
 
 export function AvailableFlightsPage() {
     const [flights, setFlights] = useState<AvailableFlight[]>([]);
@@ -47,10 +48,10 @@ export function AvailableFlightsPage() {
             <h1>Available Flights</h1>
 
             {confirmedBooking && (
-                <p className="booking-success" role="status">
-                    Booking confirmed for {confirmedBooking.passengerName} on {confirmedBooking.flightNumber}
-                    {" "}({confirmedBooking.origin} → {confirmedBooking.destination}).
-                </p>
+                <Toast
+                    message={`Booking confirmed for ${confirmedBooking.passengerName} on ${confirmedBooking.flightNumber} (${confirmedBooking.origin} → ${confirmedBooking.destination}).`}
+                    onClose={() => setConfirmedBooking(null)}
+                />
             )}
             {flights.length === 0 ? (
                 <p>No flights currently available.</p>

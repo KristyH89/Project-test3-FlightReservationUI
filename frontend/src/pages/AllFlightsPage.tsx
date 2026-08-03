@@ -3,6 +3,7 @@ import { getAllFlights, FlightApiError } from "../api/flightApi";
 import type { FlightListItem, FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
 import { BookingModal } from "../components/BookingModal";
+import { Toast } from "../components/Toast";
 
 export function AllFlightsPage() {
     const [flights, setFlights] = useState<FlightListItem[]>([]);
@@ -54,10 +55,10 @@ export function AllFlightsPage() {
             <h1>All Flights</h1>
 
             {confirmedBooking && (
-                <p className="booking-success" role="status">
-                    Booking confirmed for {confirmedBooking.passengerName} on {confirmedBooking.flightNumber}
-                    {" "}({confirmedBooking.origin} → {confirmedBooking.destination}).
-                </p>
+                <Toast
+                    message={`Booking confirmed for ${confirmedBooking.passengerName} on ${confirmedBooking.flightNumber} (${confirmedBooking.origin} → ${confirmedBooking.destination}).`}
+                    onClose={() => setConfirmedBooking(null)}
+                />
             )}
 
             <div className="flight-list">
