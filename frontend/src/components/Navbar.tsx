@@ -12,7 +12,9 @@ export function Navbar() {
                             alt="Fly Orange logo"
                             className="top-logo"
                         />
-                        <span className="top-title">Fly Orange</span>
+                        <span className="top-title">
+                            <span className="top-title-fly">Fly</span> Orange
+                        </span>
                     </Link>
                 </div>
             </div>

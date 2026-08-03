@@ -86,6 +86,9 @@ main {
   font-weight: 600;
   color: var(--color-orange);
 }
+.top-title-fly {
+  color: var(--color-ink);
+}
 
 /* ===== Navbar ===== */
 .navbar {
