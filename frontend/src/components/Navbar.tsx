@@ -22,7 +22,7 @@ export function Navbar() {
             {/* Orange navigation bar */}
             <nav className="navbar">
                 <div className="navbar-links">
-                    <NavLink to="/flights" className={({ isActive }) => isActive ? "active" : ""}>
+                    <NavLink to="/flights" end className={({ isActive }) => isActive ? "active" : ""}>
                         All Flights
                     </NavLink>
                     <NavLink to="/flights/available" className={({ isActive }) => isActive ? "active" : ""}>
