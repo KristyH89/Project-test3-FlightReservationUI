@@ -31,6 +31,9 @@ export function Navbar() {
                     <NavLink to="/my-bookings" className={({ isActive }) => isActive ? "active" : ""}>
                         My Bookings
                     </NavLink>
+                    <NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""}>
+                        About
+                    </NavLink>
                 </div>
             </nav>
         </>
