@@ -332,11 +332,12 @@ main {
   text-align: center;
 }
 
-.footer-title-row {
+.footer .footer-title-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 .footer-logo {
