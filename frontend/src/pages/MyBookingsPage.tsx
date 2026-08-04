@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getBookingsByEmail, cancelFlight, FlightApiError } from "../api/flightApi";
 import type { FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
+import { Toast } from "../components/Toast";
 
 export function MyBookingsPage() {
     const [email, setEmail] = useState("");
@@ -76,7 +77,9 @@ export function MyBookingsPage() {
                     </form>
 
                     {error && <p className="form-error" role="alert">{error}</p>}
-                    {cancelSuccessMessage && <p className="booking-success" role="status">{cancelSuccessMessage}</p>}
+                    {cancelSuccessMessage && (
+                        <Toast message={cancelSuccessMessage} onClose={() => setCancelSuccessMessage(null)} />
+                    )}
 
                     {hasSearched && bookings.length === 0 && !error && (
                         <p>No bookings found for this email address.</p>
