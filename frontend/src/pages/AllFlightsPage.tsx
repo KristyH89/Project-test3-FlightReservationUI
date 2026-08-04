@@ -4,8 +4,10 @@ import type { FlightListItem, FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
 import { BookingModal } from "../components/BookingModal";
 import { Toast } from "../components/Toast";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AllFlightsPage() {
+    usePageTitle("All Flights");
     const [flights, setFlights] = useState<FlightListItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);

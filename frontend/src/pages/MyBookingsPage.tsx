@@ -3,8 +3,10 @@ import { getBookingsByEmail, cancelFlight, FlightApiError } from "../api/flightA
 import type { FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
 import { Toast } from "../components/Toast";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function MyBookingsPage() {
+    usePageTitle("My Bookings");
     const [email, setEmail] = useState("");
     const [bookings, setBookings] = useState<FlightBooking[]>([]);
     const [hasSearched, setHasSearched] = useState(false);

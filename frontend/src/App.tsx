@@ -7,6 +7,7 @@ import { AllFlightsPage } from "./pages/AllFlightsPage";
 import { AvailableFlightsPage } from "./pages/AvailableFlightsPage";
 import { MyBookingsPage } from "./pages/MyBookingsPage";
 import { AboutPage } from "./pages/AboutPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/flights/available" element={<AvailableFlightsPage />} />
                     <Route path="/my-bookings" element={<MyBookingsPage />} />
                     <Route path="/about" element={<AboutPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </main>
             <Footer />

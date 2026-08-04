@@ -819,4 +819,20 @@ form input:focus {
   display: block;
 }
 
+/* ===== 404 page ===== */
+.not-found {
+  text-align: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
 
+.not-found svg {
+  color: var(--color-orange);
+  margin-bottom: 16px;
+}
+
+.not-found p {
+  max-width: 480px;
+  margin: 0 auto 28px;
+  color: var(--color-ink-muted);
+}

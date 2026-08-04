@@ -1,6 +1,8 @@
 import { Palette, Code2, MapPin } from "lucide-react";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AboutPage() {
+    usePageTitle("About");
     return (
         <div className="page-container">
             <h1>About Fly Orange</h1>

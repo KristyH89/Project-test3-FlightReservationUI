@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Search, ShieldCheck, Sparkles, GraduationCap } from "lucide-react";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function HomePage() {
+    usePageTitle("Home");
     return (
         <div className="homepage">
 
