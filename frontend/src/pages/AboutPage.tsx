@@ -5,8 +5,8 @@ export function AboutPage() {
         <div className="page-container">
             <h1>About Fly Orange</h1>
             <p className="about-intro">
-                Fly Orange is a student project built for Lexicon's frontend course. It's a working
-                flight search and booking interface built on top of a provided Spring Boot API. This
+                Fly Orange is a student project built for Lexicon's fullstack Java developer course. It's a
+                working flight search and booking interface built on top of a provided Spring Boot API. This
                 page explains some of the thinking behind it.
             </p>
 

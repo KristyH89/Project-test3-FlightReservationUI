@@ -91,8 +91,10 @@ export function HomePage() {
                     <div className="cta-content">
                         <h2>Ready for take-off?</h2>
                         <p>
-                            Browse <strong>All Flights</strong>, check <strong>Available Flights</strong>, or open <strong>My Bookings</strong> to
-                            manage your upcoming trips. Fly Orange keeps it simple, just like we do back home.
+                            Browse <Link to="/flights" className="inline-link">All Flights</Link>, check{" "}
+                            <Link to="/flights/available" className="inline-link">Available Flights</Link>, or open{" "}
+                            <Link to="/my-bookings" className="inline-link">My Bookings</Link> to manage your upcoming
+                            trips. Fly Orange keeps it simple, just like we do back home.
                         </p>
 
                         <div className="hero-actions">

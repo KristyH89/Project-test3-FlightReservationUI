@@ -290,6 +290,19 @@ main {
   flex: 1;
 }
 
+.inline-link {
+  color: var(--color-orange-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-orange);
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.inline-link:hover {
+  color: var(--color-orange);
+}
+
 @media (max-width: 640px) {
   .hero-panel {
     padding: 24px;
