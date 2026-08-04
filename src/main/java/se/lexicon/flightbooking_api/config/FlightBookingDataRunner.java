@@ -117,10 +117,10 @@ public class FlightBookingDataRunner implements CommandLineRunner {
                 .passengerName("Fleur van Beek")
                 .passengerEmail("fleur.vanbeek@example.com")
                 .departureTime(baseDate.plusWeeks(6).plusDays(1).withHour(8).withMinute(0))
-                .arrivalTime(baseDate.plusWeeks(6).plusDays(1).withHour(10).withMinute(0))
+                .arrivalTime(baseDate.plusWeeks(6).plusDays(1).withHour(10).withMinute(30))
                 .status(FlightStatus.BOOKED)
-                .destination("Gothenburg")
-                .price(189.99)
+                .destination("Madrid")
+                .price(209.99)
                 .build();
 
         FlightBooking bookedFlight2 = FlightBooking.builder()
