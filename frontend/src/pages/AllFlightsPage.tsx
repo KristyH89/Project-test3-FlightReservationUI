@@ -4,7 +4,7 @@ import type { FlightListItem, FlightBooking } from "../types/flight";
 import { FlightCard } from "../components/FlightCard";
 import { BookingModal } from "../components/BookingModal";
 import { Toast } from "../components/Toast";
-import { FlightFilterBar, type SortOption } from "../components/FlightFilterBar";
+import { FlightFilterBar, type SortOption, type StatusFilterOption } from "../components/FlightFilterBar";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AllFlightsPage() {
@@ -17,6 +17,7 @@ export function AllFlightsPage() {
     const [confirmedBooking, setConfirmedBooking] = useState<FlightBooking | null>(null);
 
     const [destinationFilter, setDestinationFilter] = useState("");
+    const [statusFilter, setStatusFilter] = useState<StatusFilterOption>("all");
     const [sortBy, setSortBy] = useState<SortOption>("departure-asc");
 
     useEffect(() => {
@@ -35,15 +36,16 @@ export function AllFlightsPage() {
         void loadFlights();
     }, []);
 
-    // Derive the filtered and sorted list from the raw flights whenever the
-    // source data, filter text, or sort option changes, rather than storing
-    // a separate "visible flights" state that could drift out of sync
     const visibleFlights = useMemo(() => {
-        const filtered = flights.filter((flight) =>
+        const byStatus = flights.filter((flight) =>
+            statusFilter === "all" ? true : flight.status === statusFilter
+        );
+
+        const byDestination = byStatus.filter((flight) =>
             flight.destination.toLowerCase().includes(destinationFilter.toLowerCase())
         );
 
-        const sorted = [...filtered].sort((a, b) => {
+        const sorted = [...byDestination].sort((a, b) => {
             switch (sortBy) {
                 case "price-asc":
                     return a.price - b.price;
@@ -56,7 +58,7 @@ export function AllFlightsPage() {
         });
 
         return sorted;
-    }, [flights, destinationFilter, sortBy]);
+    }, [flights, destinationFilter, statusFilter, sortBy]);
 
     function handleBooked(booking: FlightBooking) {
         setFlights((current) =>
@@ -88,6 +90,8 @@ export function AllFlightsPage() {
             <FlightFilterBar
                 destinationFilter={destinationFilter}
                 onDestinationFilterChange={setDestinationFilter}
+                statusFilter={statusFilter}
+                onStatusFilterChange={setStatusFilter}
                 sortBy={sortBy}
                 onSortByChange={setSortBy}
             />
