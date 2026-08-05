@@ -1,6 +1,6 @@
 import { ArrowUpDown, Search, Filter } from "lucide-react";
 
-export type SortOption = "departure-asc" | "price-asc" | "price-desc";
+export type SortOption = "departure-asc" | "departure-desc" | "price-asc" | "price-desc";
 export type StatusFilterOption = "all" | "AVAILABLE" | "BOOKED";
 
 interface FlightFilterBarProps {
@@ -51,6 +51,7 @@ export function FlightFilterBar({
                 <ArrowUpDown size={16} />
                 <select value={sortBy} onChange={(e) => onSortByChange(e.target.value as SortOption)}>
                     <option value="departure-asc">Departure time (soonest first)</option>
+                    <option value="departure-desc">Departure time (latest first)</option>
                     <option value="price-asc">Price (low to high)</option>
                     <option value="price-desc">Price (high to low)</option>
                 </select>

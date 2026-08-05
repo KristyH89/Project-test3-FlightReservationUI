@@ -51,6 +51,8 @@ export function AllFlightsPage() {
                     return a.price - b.price;
                 case "price-desc":
                     return b.price - a.price;
+                case "departure-desc":
+                    return new Date(b.departureTime).getTime() - new Date(a.departureTime).getTime();
                 case "departure-asc":
                 default:
                     return new Date(a.departureTime).getTime() - new Date(b.departureTime).getTime();
