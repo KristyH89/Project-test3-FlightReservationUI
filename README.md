@@ -18,11 +18,6 @@ several bugs in it, including a race condition risk in the booking flow and a ca
 and extended it with an `origin` field so every flight has both a departure and an arrival city, not just a
 destination.
 
-The ten flight destinations aren't random cities: they're places I've personally traveled to. The name "Fly Orange"
-and the orange color scheme are a deliberate, lighter nod to the Netherlands, and the flight cards are styled after
-a real boarding pass, right down to the perforated tear line. More on those decisions further down, under
-[About Page](#-about-page), and directly on the app's own `/about` page once it's running.
-
 👉 [View project instructions](ProjectInstructions.md)
 
 ---
@@ -65,6 +60,8 @@ a real boarding pass, right down to the perforated tear line. More on those deci
 - ✔ **Cancel a booking**, with a confirm-before-cancel step
 
 **Extras I added on top**
+- ✔ A designed **homepage** with a hero section, feature highlights, and a call-to-action, even though it
+  wasn't required by the assignment
 - ✔ Custom **orange design system**: boarding-pass-styled flight cards, a dark hero panel, a monogram-style header
 - ✔ **Filtering and sorting** on both flight list pages
 - ✔ Dismissible **toast notifications** for booking confirmations and cancellations, instead of static banners
