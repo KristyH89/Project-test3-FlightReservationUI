@@ -194,7 +194,7 @@ backend/
 
 ### Available Flights
 ![Available flights list](./screenshot4.png)
-![Booking modal](./screenshot5.png)
+![Booking modal](./Screenshot5.png)
 
 
 ---
