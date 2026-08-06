@@ -870,3 +870,36 @@ form input:focus {
 .filter-field:focus-within {
   border-color: var(--color-orange);
 }
+
+/* ===== Responsive flight card ===== */
+@media (max-width: 600px) {
+  .flight-card {
+    flex-direction: column;
+  }
+
+  .flight-card-side {
+    width: 100%;
+    border-left: none;
+    border-top: 2px dashed var(--color-border);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Move the punched-out notches from the sides to the top edge, matching
+     the new horizontal tear line */
+  .flight-card-side::before,
+  .flight-card-side::after {
+    left: auto;
+    top: -8px;
+  }
+
+  .flight-card-side::before {
+    right: -8px;
+  }
+
+  .flight-card-side::after {
+    left: -8px;
+    bottom: auto;
+  }
+}
