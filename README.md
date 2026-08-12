@@ -14,16 +14,25 @@ The goal of the assignment was to build a working flight search and booking inte
 **Spring Boot REST API**, using **React, TypeScript, React Router and lucide-react**.
 
 The backend (entity, DTOs, controller, service, repository) was provided by Lexicon. Along the way I found and fixed
-several bugs in it — including a race condition risk in the booking flow and a case-sensitive email comparison bug —
+several bugs in it, including a race condition risk in the booking flow and a case-sensitive email comparison bug 
 and extended it with an `origin` field so every flight has both a departure and an arrival city, not just a
 destination.
 
-👉 [View project instructions](README.md)
+👉 [View project instructions](ProjectInstructions.md)
 
-The ten flight destinations aren't random cities: they're places I've personally travelled to. The name "Fly Orange"
-and the orange color scheme are a deliberate, lighter nod to the Netherlands, and the flight cards are styled after
-a real boarding pass, right down to the perforated tear line. More on those decisions is on the app's own
-[About page](#-about-page).
+---
+
+## 📚 Table of Contents
+
+- [Project Goals](#-project-goals)
+- [Features](#-features)
+- [Components](#-components)
+- [Pages](#-pages)
+- [About Page](#-about-page)
+- [Technologies Used](#-technologies-used)
+- [Project Structure](#-project-structure)
+- [Running Locally](#-running-locally)
+- [Screenshots](#-screenshots)
 
 ---
 
@@ -51,6 +60,8 @@ a real boarding pass, right down to the perforated tear line. More on those deci
 - ✔ **Cancel a booking**, with a confirm-before-cancel step
 
 **Extras I added on top**
+- ✔ A designed **homepage** with a hero section, feature highlights, and a call-to-action, even though it
+  wasn't required by the assignment
 - ✔ Custom **orange design system**: boarding-pass-styled flight cards, a dark hero panel, a monogram-style header
 - ✔ **Filtering and sorting** on both flight list pages
 - ✔ Dismissible **toast notifications** for booking confirmations and cancellations, instead of static banners
@@ -101,7 +112,7 @@ across every page instead of being duplicated inside each page component.
 
 The About page explains three things a reviewer wouldn't otherwise know from just looking at the code:
 
-- **Why these destinations** — all ten are places I've actually travelled to, and I deliberately kept the list at
+- **Why these destinations** — all ten are places I've actually traveled to, and I deliberately kept the list at
   the original ten rather than adding more
 - **Design decisions** — why "Fly Orange" over a more literal Dutch name, and why the flight cards are styled like
   boarding passes
@@ -166,9 +177,9 @@ backend/
 1. `cd frontend`
 2. `npm install`
 3. Create a `.env` file in `frontend/` with:
-
-VITE_API_BASE_URL=http://localhost:8080
-
+```
+   VITE_API_BASE_URL=http://localhost:8080
+```
 4. `npm run dev`
 5. Open `http://localhost:5173`
 
@@ -183,7 +194,7 @@ VITE_API_BASE_URL=http://localhost:8080
 
 ### Available Flights
 ![Available flights list](./screenshot4.png)
-![Booking modal](./screenshot5.png)
+![Booking modal](./Screenshot5.png)
 
 
 ---
