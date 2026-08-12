@@ -6,7 +6,7 @@ export function Footer() {
             <div className="footer-text">
                 <Link to="/" className="footer-title-row">
                     <img
-                        src="/FlyOrange2-Photoroom.ico"
+                        src={`${import.meta.env.BASE_URL}FlyOrange2-Photoroom.ico`}
                         alt="Fly Orange logo"
                         className="footer-logo"
                     />

@@ -53,7 +53,7 @@ export function AboutPage() {
             </div>
             <div className="about-map-banner">
                 <img
-                    src="/travel-map.png"
+                    src={`${import.meta.env.BASE_URL}travel-map.png`}
                     alt="World map showing the ten destinations I've personally travelled to"
                     className="about-map-image"
                 />

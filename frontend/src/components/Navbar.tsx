@@ -8,7 +8,7 @@ export function Navbar() {
                 <div className="top-header-inner">
                     <Link to="/" className="top-header-link">
                         <img
-                            src="/FlyOrange2-Photoroom(5).ico"
+                            src={`${import.meta.env.BASE_URL}FlyOrange2-Photoroom(5).ico`}
                             alt="Fly Orange logo"
                             className="top-logo"
                         />

@@ -12,7 +12,7 @@ export function HomePage() {
                 <div className="section-inner">
                     <div className="hero-panel">
                         <img
-                            src="/Molen-met-tulpen-scaled.jpg"
+                            src={`${import.meta.env.BASE_URL}Molen-met-tulpen-scaled.jpg`}
                             alt="Dutch landscape"
                             className="hero-image"
                         />
@@ -85,7 +85,7 @@ export function HomePage() {
             <section className="section section-white">
                 <div className="section-inner cta-section">
                     <img
-                        src="/orangeplane2.jpeg"
+                        src={`${import.meta.env.BASE_URL}orangeplane2.jpeg`}
                         alt="Fly Orange airplane"
                         className="cta-plane-image"
                     />

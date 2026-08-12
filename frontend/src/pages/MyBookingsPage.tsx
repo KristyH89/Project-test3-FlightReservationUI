@@ -128,7 +128,7 @@ export function MyBookingsPage() {
                 {/* RIGHT SIDE — full-height image */}
                 <div className="mybookings-right">
                     <img
-                        src="/bookingplane.jpeg"
+                        src={`${import.meta.env.BASE_URL}bookingplane.jpeg`}
                         alt="Fly Orange plane at sunset"
                         className="booking-plane-image"
                     />
