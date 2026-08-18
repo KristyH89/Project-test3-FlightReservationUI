@@ -6,6 +6,7 @@ import { BookingModal } from "../components/BookingModal";
 import { Toast } from "../components/Toast";
 import { FlightFilterBar, type SortOption, type StatusFilterOption } from "../components/FlightFilterBar";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { Plane } from "lucide-react";
 
 export function AllFlightsPage() {
     usePageTitle("All Flights");
@@ -71,7 +72,16 @@ export function AllFlightsPage() {
     }
 
     if (isLoading) {
-        return <p>Loading flights...</p>;
+        return (
+            <div className="page-container loading-notice">
+                <Plane className="loading-plane" size={32} />
+                <p>Warming up the engines...</p>
+                <p className="loading-notice-detail">
+                    Our backend runs on a free hosting tier, so it takes a little runway to get going if
+                    it's been idle for a while. Almost there!
+                </p>
+            </div>
+        );
     }
 
     if (error) {

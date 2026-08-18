@@ -903,3 +903,39 @@ form input:focus {
     bottom: auto;
   }
 }
+
+/* ===== Loading notice ===== */
+.loading-notice {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.loading-plane {
+  color: var(--color-orange);
+  animation: plane-bob 1.4s ease-in-out infinite;
+}
+
+@keyframes plane-bob {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-8deg);
+  }
+}
+
+.loading-notice p {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 16px 0 0;
+}
+
+.loading-notice-detail {
+  font-family: var(--font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  color: var(--color-ink-muted);
+  max-width: 420px;
+  margin: 8px auto 0 !important;
+}
