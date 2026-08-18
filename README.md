@@ -20,6 +20,12 @@ destination.
 
 👉 [View project instructions](ProjectInstructions.md)
 
+--- 
+## 🚀 Live Demo
+
+[Live demo (the flights can take some time to load)](https://kristyh89.github.io/Project-test3-FlightReservationUI/)
+
+
 ---
 
 ## 📚 Table of Contents
