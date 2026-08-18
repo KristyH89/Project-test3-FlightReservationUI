@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/<Project-test3-FlightReservationUI\n>/",
+  base: "/Project-test3-FlightReservationUI\n/",
 });
