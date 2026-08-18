@@ -2,11 +2,11 @@ spring:
   application:
     name: FlightBooking_API
   datasource:
-    url: jdbc:mysql://localhost:3306/flight_booking_db?createDatabaseIfNotExist=true&useSSL=true&serverTimezone=UTC
-    username: root
-    password: root
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
