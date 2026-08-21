@@ -234,7 +234,7 @@ OPENAI_API_KEY=<your-openai-key>
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](./Flyorange-screenshot-home.png) 
+![Homepage](./FlyOrange-screenshot-home.png) 
 
 
 ### Available Flights
