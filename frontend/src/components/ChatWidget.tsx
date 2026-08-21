@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { MessageCircle, X, Send, Minus } from "lucide-react";
 import { getFlightRecommendation, ChatApiError } from "../api/aiApi";
 
 interface ChatMessage {
@@ -62,6 +62,24 @@ export function ChatWidget() {
                 <div className="chat-window">
                     <div className="chat-window-header">
                         <span>Fly Orange Assistant</span>
+                        <div className="chat-window-header-actions">
+                            <button
+                                type="button"
+                                className="chat-header-button"
+                                onClick={() => setIsOpen(false)}
+                                aria-label="Minimize chat"
+                            >
+                                <Minus size={18} />
+                            </button>
+                            <button
+                                type="button"
+                                className="chat-header-button"
+                                onClick={() => setIsOpen(false)}
+                                aria-label="Close chat"
+                            >
+                                <X size={18} />
+                            </button>
+                        </div>
                     </div>
 
                     <div className="chat-window-messages">
