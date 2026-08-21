@@ -4,7 +4,8 @@
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?logo=reactrouter&logoColor=white)
 ![lucide-react](https://img.shields.io/badge/lucide--react-icons-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?logo=springboot&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white)
 ![Responsive-Design](https://img.shields.io/badge/Responsive-Design-green)
 
 # ✈️ Fly Orange – Flight Booking Interface
@@ -14,17 +15,17 @@ The goal of the assignment was to build a working flight search and booking inte
 **Spring Boot REST API**, using **React, TypeScript, React Router and lucide-react**.
 
 The backend (entity, DTOs, controller, service, repository) was provided by Lexicon. Along the way I found and fixed
-several bugs in it, including a race condition risk in the booking flow and a case-sensitive email comparison bug 
+several bugs in it, including a race condition risk in the booking flow and a case-sensitive email comparison bug
 and extended it with an `origin` field so every flight has both a departure and an arrival city, not just a
-destination.
+destination. I later migrated the database from MySQL to PostgreSQL and added an AI-powered flight recommendation
+chatbot using Spring AI, so I could deploy the whole project publicly.
 
 👉 [View project instructions](ProjectInstructions.md)
 
---- 
+---
 ## 🚀 Live Demo
 
-[Live demo (the flights can take some time to load)](https://kristyh89.github.io/Project-test3-FlightReservationUI/)
-
+[Live demo (the backend runs on a free tier and can take up to a minute to wake up)](https://kristyh89.github.io/Project-test3-FlightReservationUI/)
 
 ---
 
@@ -35,9 +36,11 @@ destination.
 - [Components](#-components)
 - [Pages](#-pages)
 - [About Page](#-about-page)
+- [AI Flight Assistant](#-ai-flight-assistant)
 - [Technologies Used](#-technologies-used)
 - [Project Structure](#-project-structure)
 - [Running Locally](#-running-locally)
+- [Deployment](#-deployment)
 - [Screenshots](#-screenshots)
 
 ---
@@ -50,7 +53,7 @@ destination.
 - Keep the **project structure clean and easy to follow**
 - Use **lucide-react** icons instead of hand-written SVGs
 - Go beyond the required features by adding both optional features (booking lookup, cancellation), plus my own
-  extras (filtering, sorting, a custom design system, an About page)
+  extras (filtering, sorting, a custom design system, an About page, and an AI chatbot)
 
 ---
 
@@ -72,8 +75,11 @@ destination.
 - ✔ **Filtering and sorting** on both flight list pages
 - ✔ Dismissible **toast notifications** for booking confirmations and cancellations, instead of static banners
 - ✔ A dedicated **About page** explaining the reasoning behind the destinations and design choices
+- ✔ An **AI flight assistant**, a floating chat widget that recommends a destination based on what the traveler
+  is looking for
 - ✔ A custom **404 page** and per-page browser tab titles
 - ✔ Fully responsive layout, including a stacked flight card layout on small screens
+- ✔ Deployed publicly: frontend on GitHub Pages, backend on Render, database on Neon
 
 ---
 
@@ -86,6 +92,7 @@ destination.
 | `Navbar` | White logo strip + orange navigation bar, shown on every page. Highlights the active route. |
 | `Footer` | Site footer with logo, tagline and a short disclaimer. Logo links back to the homepage. |
 | `ScrollToTop` | Scrolls the window to the top on every route change, since React Router doesn't do this by default. |
+| `ChatWidget` | Floating chat bubble in the bottom-right corner, expanding into a chat panel that talks to the AI flight assistant. |
 
 ### Flight components
 
@@ -109,12 +116,12 @@ destination.
 | `AboutPage` | `/about` | The reasoning behind the destinations, branding and tech choices |
 | `NotFoundPage` | `*` | Custom 404 page for any unmatched route |
 
-`Navbar`, `Footer` and `ScrollToTop` are rendered in `App.tsx` **outside** of `<Routes>`, so they stay consistent
-across every page instead of being duplicated inside each page component.
+`Navbar`, `Footer`, `ScrollToTop` and `ChatWidget` are rendered in `App.tsx` **outside** of `<Routes>`, so they stay
+consistent across every page instead of being duplicated inside each page component.
 
 ---
 
-## 🖼️ About Page
+## 📘 About Page
 
 The About page explains three things a reviewer wouldn't otherwise know from just looking at the code:
 
@@ -126,7 +133,19 @@ The About page explains three things a reviewer wouldn't otherwise know from jus
 
 ---
 
-## 🛠️ Technologies Used
+## 💬 AI Flight Assistant
+
+A floating chat bubble, visible on every page, opens into a chat panel powered by **Spring AI** and OpenAI's
+`gpt-4o` model. The traveler describes what kind of trip they're after (for example, "somewhere warm and
+relaxing under 300 euros"), and the assistant recommends one of Fly Orange's ten destinations, with a reason,
+a rough price expectation, and a booking tip.
+
+The assistant is restricted through its system prompt to only ever recommend destinations Fly Orange actually
+flies to, so it never suggests a flight the site doesn't offer.
+
+---
+
+## 🧰 Technologies Used
 
 **Frontend**
 - **React 18**
@@ -138,8 +157,14 @@ The About page explains three things a reviewer wouldn't otherwise know from jus
 **Backend** (provided by Lexicon, extended and fixed by me)
 - **Spring Boot**
 - **Spring Data JPA**
-- **MySQL**
+- **PostgreSQL** (migrated from MySQL, hosted on Neon)
+- **Spring AI** with OpenAI's `gpt-4o` (flight recommendation assistant)
 - **springdoc-openapi** (Swagger UI)
+
+**Hosting**
+- **GitHub Pages** (frontend)
+- **Render** (backend, via Docker)
+- **Neon** (PostgreSQL database)
 
 ---
 
@@ -149,34 +174,40 @@ The About page explains three things a reviewer wouldn't otherwise know from jus
 frontend/
 ├── src/
 │ ├── api/ → flightApi.ts (all backend requests, error handling)
-│ ├── components/ → FlightCard, FlightFilterBar, BookingModal, Toast, Navbar, Footer, ScrollToTop
+│ ├── components/ → FlightCard, FlightFilterBar, BookingModal, Toast, Navbar, Footer, ScrollToTop, ChatWidget
 │ ├── hooks/ → usePageTitle.ts
 │ ├── pages/ → HomePage, AllFlightsPage, AvailableFlightsPage, MyBookingsPage, AboutPage, NotFoundPage
 │ ├── types/ → flight.ts
 │ └── App.tsx
 backend/
+├── Dockerfile
 └── src/main/java/se/lexicon/flightbooking_api/
 ├── config/ → FlightBookingDataRunner, CorsConfig, SwaggerConfig
-├── controller/ → FlightBookingController
+├── controller/ → FlightBookingController, OpenAIController
 ├── dto/ → FlightListDTO, AvailableFlightDTO, FlightBookingDTO, BookFlightRequestDTO
+│ └── ai/ → FlightQueryParameters, FlightRecommendationResponse
 ├── entity/ → FlightBooking, FlightStatus
 ├── exception/ → MyExceptionHandler and custom exceptions
 ├── mapper/ → FlightBookingMapper
 ├── repository/ → FlightBookingRepository
-└── service/ → FlightBookingService, FlightBookingServiceImpl
+└── service/ → FlightBookingService, FlightBookingServiceImpl, OpenAIService, OpenAIServiceImpl
 ```
 ---
 
-## ▶️ Running Locally
+## 🏃 Running Locally
 
 ### Backend
 
-1. Start a MySQL container:
-```bash
-   docker run --name flight-booking-mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:8.0
-```
-2. Run `FlightBookingApiApplication` from IntelliJ (or `./mvnw spring-boot:run`)
-3. The API runs on `http://localhost:8080`, with Swagger docs at `/swagger-ui.html`
+1. Create a free [Neon](https://neon.tech) PostgreSQL database and note its pooled connection details
+2. Set the following environment variables (in IntelliJ's Run Configuration, or your shell):
+```   
+DATABASE_URL=jdbc:postgresql://<your-neon-pooler-host>/<database>?sslmode=require
+DATABASE_USERNAME=<your-neon-role>
+DATABASE_PASSWORD=<your-neon-password>
+OPENAI_API_KEY=<your-openai-key>
+```   
+3. Run `FlightBookingApiApplication` from IntelliJ (or `./mvnw spring-boot:run`)
+4. The API runs on `http://localhost:8080`, with Swagger docs at `/swagger-ui.html`
 
 ### Frontend
 
@@ -190,18 +221,24 @@ backend/
 5. Open `http://localhost:5173`
 
 ---
+## 🌐 Deployment
+
+- **Frontend**: built with `npm run deploy` (via the `gh-pages` package) and served from GitHub Pages. Uses
+  `HashRouter` instead of `BrowserRouter`, since GitHub Pages can't redirect unknown paths back to the app.
+- **Backend**: containerized with a `Dockerfile` and deployed on Render's free tier, connected to Neon
+- **Database**: PostgreSQL, hosted on Neon's free tier
+- Environment variables (`DATABASE_URL`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`, `OPENAI_API_KEY`) are set
+  separately in Render's dashboard, and a separate `.env.production` in the frontend points to the live Render URL
+- Render's free tier spins down after inactivity, so the first request after a while can take up to a minute
 
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage - hero section](./screenshot1.png)
-![Homepage - why Fly Orange](./screenshot2.png)
-![Homepage - ready for take-off](./screenshot3.png)
+![Homepage](./Flyorange-screenshot-home.png) 
+
 
 ### Available Flights
-![Available flights list](./screenshot4.png)
-![Booking modal](./Screenshot5.png)
-
+![Available flights list](./FlyOrange-screenshot-availableflights.png)
 
 ---
 
