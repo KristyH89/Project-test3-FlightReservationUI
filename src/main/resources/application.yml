@@ -13,6 +13,15 @@ spring:
     properties:
       hibernate:
         format_sql: false
+  ai:
+    retry:
+      max-attempts: 1
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        model: gpt-4o
+        temperature: 0.4
+        max-tokens: 1000
 
 springdoc:
   api-docs:

@@ -7,7 +7,9 @@ import { AllFlightsPage } from "./pages/AllFlightsPage";
 import { AvailableFlightsPage } from "./pages/AvailableFlightsPage";
 import { MyBookingsPage } from "./pages/MyBookingsPage";
 import { AboutPage } from "./pages/AboutPage";
+import { ChatWidget } from "./components/ChatWidget";
 import { NotFoundPage } from "./pages/NotFoundPage";
+
 
 function App() {
     return (
@@ -25,6 +27,7 @@ function App() {
                 </Routes>
             </main>
             <Footer />
+            <ChatWidget />
         </>
     );
 }
